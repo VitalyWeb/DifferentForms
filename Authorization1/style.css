@@ -18,9 +18,9 @@ body {
     width: 420px;
     color: white;
     background: transparent;
-    border: 2px solid rgb(255, 255, 255, .2);
+    border: 2px solid rgba(255, 255, 255, 0.2);
     backdrop-filter: blur(20px);
-    box-shadow: 0 0 10px rgb(0, 0, 0, .2);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     border-radius: 20px;
     padding: 30px 40px;
 }
@@ -43,7 +43,7 @@ body {
     background: transparent;
     border: none;
     outline: none;
-    border: 2px solid rgb(255, 255, 255, .2);
+    border: 2px solid rgba(255, 255, 255, 0.2);
     border-radius: 40px;
     font-size: 16px;
     color: white;
@@ -54,12 +54,27 @@ body {
     color: white;
 }
 
-.input-box i {
+.input-box > i {
     position: absolute;
     right: 20px;
     top: 50%;
     transform: translateY(-50%);
     font-size: 20px;
+    pointer-events: none;
+}
+
+.toggle-password {
+    position: absolute;
+    right: 45px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    z-index: 2;
+    color: white;
+}
+
+.toggle-password i {
+    font-size: 18px;
 }
 
 .wrapper .remember {
@@ -91,7 +106,7 @@ body {
     border: none;
     outline: none;
     border-radius: 40px;
-    box-shadow: 0 0 10px rgb(0, 0, 0, .2);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     cursor: pointer;
     font-size: 16px;
     font-weight: 600;

@@ -5,49 +5,36 @@ const registeredUsers = [
 ];
 
 const form = document.querySelector('form');
-const login = document.querySelector('[name="login"]');
-const password = document.querySelector('[name="password"]');
-const submitButton = document.querySelector('button[type="submit"]');
+const login = form.login;
+const password = form.password;
 
-const inputsArray = [login, password, submitButton];
-
-inputsArray.forEach(el => el.addEventListener('keydown', handleEvent));
-
-function handleEvent(event) {
-  if (event.key === 'Enter') {
-    event.preventDefault();
-
-    const currentIndex = inputsArray.indexOf(event.target);
-
-    if (currentIndex > -1 && currentIndex < inputsArray.length - 1) {
-      inputsArray[currentIndex + 1].focus();
-    } else if (currentIndex === inputsArray.length - 1) {
-      form.requestSubmit();
-    }
-  }
-}
-
-form.addEventListener('submit', handleSubmit);
-
-function handleSubmit(event) {
+form.addEventListener('submit', event => {
   event.preventDefault();
 
-  if (validate()) {
+  const isValid = registeredUsers.some(
+    ([u, p]) =>
+      u === login.value.trim() && p === password.value.trim()
+  );
+
+  if (isValid) {
     alert("Успешный вход!");
     console.log("Успешный вход!");
     form.reset();
     login.focus();
+  } else {
+    alert("Неверный логин или пароль");
+    console.log("Неверный логин или пароль");
   }
-}
+});
 
-function validate() {
-  for (let user of registeredUsers) {
-    if (login.value.trim() === user[0] && password.value.trim() === user[1]) {
-      return true;
-    }
-  }
 
-  alert("Неверный логин или пароль");
-  console.log("Неверный логин или пароль");
-  return false;
-}
+const togglePassword = document.querySelector('.toggle-password');
+
+togglePassword.addEventListener('click', () => {
+  const isPassword = password.type === 'password';
+  password.type = isPassword ? 'text' : 'password';
+
+  togglePassword.innerHTML = isPassword
+    ? '<i class="fi fi-rr-eye-crossed"></i>'
+    : '<i class="fi fi-rr-eye"></i>';
+});
